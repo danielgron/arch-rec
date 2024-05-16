@@ -1,9 +1,12 @@
 // Create a super class for all the metadata classes
 
+using System.Xml.Serialization;
+
 public class TypeMetaData
 {
     public string Name { get; set; }
     public NameSpace NameSpace { get; set; }
+    public List<NameSpace> Usings { get; private set; } = new();
     public List<string> UnresolvedImplInh { get; set; } = new();
 
     public TypeMetaData(string name, NameSpace nameSpace)
@@ -29,5 +32,10 @@ public class TypeMetaData
                 UnresolvedImplInh.Remove(unres);
             }
         }
+    }
+
+    internal void ResolveUsings(){
+        
+
     }
 }

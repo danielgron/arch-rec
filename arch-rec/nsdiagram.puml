@@ -1,0 +1,122 @@
+@startuml
+left to right direction
+skinparam defaultFontSize 16
+!define InternalMD circle #green
+!define ExternalMD circle #red
+<style>
+circle {
+  FontSize 30
+  BackGroundColor yellow
+  Margin 30
+  Padding 50
+}
+</style>
+InternalMD QuestPDF
+ExternalMD System
+ExternalMD System.Collections.Generic
+ExternalMD QuestPDF.Fluent
+ExternalMD Avalonia.Controls
+ExternalMD Avalonia.Controls.Primitives
+ExternalMD Avalonia.Markup.Xaml
+ExternalMD Avalonia
+ExternalMD Avalonia.Controls.ApplicationLifetimes
+ExternalMD System.Collections.ObjectModel
+ExternalMD System.Diagnostics
+ExternalMD Avalonia.Threading
+ExternalMD ReactiveUI
+ExternalMD SkiaSharp
+ExternalMD System.Collections.Concurrent
+ExternalMD System.Text.Json
+ExternalMD Microsoft.AspNetCore.Builder
+ExternalMD Microsoft.AspNetCore.Hosting
+ExternalMD Microsoft.AspNetCore.Http
+ExternalMD Microsoft.Extensions.DependencyInjection
+ExternalMD Microsoft.Extensions.Logging
+ExternalMD NUnit.Framework
+ExternalMD System.Linq
+ExternalMD QuestPDF.Skia.Text
+ExternalMD System.Runtime.InteropServices
+ExternalMD QuestPDF.Drawing.Exceptions
+InternalMD QuestPDF.ReportSample
+InternalMD QuestPDF.Previewer
+InternalMD QuestPDF.Infrastructure
+InternalMD QuestPDF.Helpers
+InternalMD QuestPDF.Elements
+InternalMD QuestPDF.Skia
+InternalMD QuestPDF.Drawing
+InternalMD QuestPDF.Elements.Table
+InternalMD QuestPDF.Elements.Text
+InternalMD QuestPDF.Elements.Text.Items
+QuestPDF  --> System
+QuestPDF  --> System.Collections.Generic
+QuestPDF  --> QuestPDF.Infrastructure
+QuestPDF  --> QuestPDF.Fluent
+QuestPDF  --> QuestPDF.Helpers
+QuestPDF  --> Avalonia.Controls
+QuestPDF  --> Avalonia.Controls.Primitives
+QuestPDF  --> Avalonia.Markup.Xaml
+QuestPDF  --> Avalonia
+QuestPDF  --> Avalonia.Controls.ApplicationLifetimes
+QuestPDF  --> System.Collections.ObjectModel
+QuestPDF  --> System.Diagnostics
+QuestPDF  --> Avalonia.Threading
+QuestPDF  --> ReactiveUI
+QuestPDF  --> SkiaSharp
+QuestPDF  --> System.Collections.Concurrent
+QuestPDF  --> System.Text.Json
+QuestPDF  --> Microsoft.AspNetCore.Builder
+QuestPDF  --> Microsoft.AspNetCore.Hosting
+QuestPDF  --> Microsoft.AspNetCore.Http
+QuestPDF  --> Microsoft.Extensions.DependencyInjection
+QuestPDF  --> Microsoft.Extensions.Logging
+QuestPDF  --> NUnit.Framework
+QuestPDF  --> System.Linq
+QuestPDF  --> QuestPDF.Drawing
+QuestPDF  --> QuestPDF.Skia
+QuestPDF  --> QuestPDF.Skia.Text
+QuestPDF  --> QuestPDF.Elements
+QuestPDF  --> System.Runtime.InteropServices
+QuestPDF  --> QuestPDF.Drawing.Exceptions
+QuestPDF.ReportSample  --> System
+QuestPDF.ReportSample  --> System.Collections.Generic
+QuestPDF.ReportSample  --> QuestPDF.Infrastructure
+QuestPDF.ReportSample  --> QuestPDF.Fluent
+QuestPDF.ReportSample  --> QuestPDF.Helpers
+QuestPDF.ReportSample  --> Avalonia.Controls
+QuestPDF.ReportSample  --> Avalonia.Controls.Primitives
+QuestPDF.ReportSample  --> Avalonia.Markup.Xaml
+QuestPDF.ReportSample  --> Avalonia
+QuestPDF.ReportSample  --> Avalonia.Controls.ApplicationLifetimes
+QuestPDF.ReportSample  --> System.Collections.ObjectModel
+QuestPDF.ReportSample  --> System.Diagnostics
+QuestPDF.ReportSample  --> Avalonia.Threading
+QuestPDF.ReportSample  --> ReactiveUI
+QuestPDF.ReportSample  --> SkiaSharp
+QuestPDF.ReportSample  --> System.Collections.Concurrent
+QuestPDF.ReportSample  --> System.Text.Json
+QuestPDF.ReportSample  --> Microsoft.AspNetCore.Builder
+QuestPDF.ReportSample  --> Microsoft.AspNetCore.Hosting
+QuestPDF.ReportSample  --> Microsoft.AspNetCore.Http
+QuestPDF.ReportSample  --> Microsoft.Extensions.DependencyInjection
+QuestPDF.ReportSample  --> Microsoft.Extensions.Logging
+QuestPDF.ReportSample  --> NUnit.Framework
+QuestPDF.ReportSample  --> System.Linq
+QuestPDF.ReportSample  --> QuestPDF.Drawing
+QuestPDF.ReportSample  --> QuestPDF.Skia
+QuestPDF.ReportSample  --> QuestPDF.Skia.Text
+QuestPDF.ReportSample  --> QuestPDF.Elements
+QuestPDF.ReportSample  --> System.Runtime.InteropServices
+QuestPDF.ReportSample  --> QuestPDF.Drawing.Exceptions
+QuestPDF.Previewer  --> Avalonia.Controls
+QuestPDF.Previewer  --> Avalonia.Controls.Primitives
+QuestPDF.Previewer  --> Avalonia.Markup.Xaml
+QuestPDF.Previewer  --> System.Collections.ObjectModel
+QuestPDF.Previewer  --> System.Diagnostics
+QuestPDF.Previewer  --> Avalonia.Threading
+QuestPDF.Previewer  --> ReactiveUI
+QuestPDF.Previewer  --> SkiaSharp
+QuestPDF.Infrastructure  --> QuestPDF.Skia
+QuestPDF.Infrastructure  --> QuestPDF.Skia.Text
+QuestPDF.Infrastructure  --> QuestPDF.Elements
+QuestPDF.Skia  --> System.Runtime.InteropServices
+@enduml

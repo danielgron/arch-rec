@@ -5,15 +5,28 @@ public class NameSpace
     public NameSpace Parent { get; set; }
     public IDictionary<string, NameSpace> Children { get; set; }
     public string Name { get; set; }
-    public List<FileMetadata> Files {get;set;}
+    public string FullName { get; set; }
+    public List<FileMetadata> Files {get; private set;}
+    public IDictionary<string, NameSpace> Usings { get; set; }
 
-    public NameSpace(string name, NameSpace parent)
+    public NameSpace(string fullName, NameSpace parent)
     {
-        Name = name;
+        FullName = fullName;
+        Name = fullName.Split(".")[^1];
         Parent = parent;
         if (Parent != null) Parent.AddChild(this);
         Files = new List<FileMetadata>();
         Children = new Dictionary<string, NameSpace>();
+        Usings = new Dictionary<string, NameSpace>();
+    }
+
+    public void AddFile(FileMetadata file){
+        Files.Add(file);
+    }
+
+    public void AddUsing(NameSpace ns){
+
+        Usings.Add(ns.FullName, ns);
     }
 
     public void AddChild(NameSpace child){

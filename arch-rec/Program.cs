@@ -71,10 +71,11 @@ foreach (var iface in interfaces)
 }
 
 GraphWriter.WriteClasses("./cidiagram.puml", classes, interfaces, unresolved);
+GraphWriter.WriteNamespace("./nsdiagram.puml", ns);
 
 foreach (var n in ns)
 {
-    //Console.WriteLine(n.Value);
+    Console.WriteLine(n.Value);
 
 
 }

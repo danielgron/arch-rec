@@ -1,9 +1,14 @@
 @startuml
-left to right direction
-skinparam defaultFontSize 14
+skinparam defaultFontSize 16
 !define InterfaceMD circle #green
 !define ClassMD circle #black
 !define ExternalMD circle #red
+ExternalMD {
+FontSize 30
+BackGroundColor yellow
+Margin 30
+Padding 50
+}
 ClassMD ReportModel
 ClassMD ReportHeaderField
 ClassMD Location
@@ -13,240 +18,21 @@ ClassMD ReportSectionText
 ClassMD ReportSectionMap
 ClassMD ReportSectionPhotos
 ClassMD ReportPhoto
-ClassMD DataSource
-ClassMD Helpers
-ClassMD Typography
-ClassMD Settings
 ClassMD PreviewerWindow
-ClassMD PreviewerApp
 ClassMD PreviewerWindowViewModel
 ClassMD DocumentStructure
 ClassMD PageSize
 ClassMD PageSnapshotIndex
 ClassMD RenderedPageSnapshot
-ClassMD PreviewerControl
-ClassMD InteractiveCanvas
-ClassMD CommunicationService
-ClassMD SkiaSharpHelpers
-ClassMD LicenseSetup
-ClassMD SectionTemplate
-ClassMD StandardReport
-ClassMD PhotoTemplate
-ClassMD TableOfContentsTemplate
-ClassMD DifferentHeadersTemplate
-ClassMD ImagePlaceholder
-ClassMD PreviewerService
-ClassMD HotReloadManager
-ClassMD ExceptionDocument
-ClassMD Extensions
-ClassMD ContainerElement
 ClassMD DocumentLocation
-ClassMD DocumentMetadata
-ClassMD UnitExtensions
 ClassMD Slot
-ClassMD PageContext
-ClassMD Image
-ClassMD SvgImage
 ClassMD DocumentSettings
-ClassMD MergedDocument
 ClassMD ImageGenerationSettings
-ClassMD Element
-ClassMD DynamicComponentProxy
-ClassMD DynamicComponentComposeResult
-ClassMD TextStyleManager
-ClassMD Colors
-ClassMD Red
-ClassMD Pink
-ClassMD Purple
-ClassMD DeepPurple
-ClassMD Indigo
-ClassMD Blue
-ClassMD LightBlue
-ClassMD Cyan
-ClassMD Teal
-ClassMD Green
-ClassMD LightGreen
-ClassMD Lime
-ClassMD Yellow
-ClassMD Amber
-ClassMD Orange
-ClassMD DeepOrange
-ClassMD Brown
-ClassMD Grey
-ClassMD BlueGrey
-ClassMD NativeDependencyCompatibilityChecker
-ClassMD ColorParser
-ClassMD Placeholders
 ClassMD Fonts
-ClassMD PageSizes
-ClassMD PageSizeExtensions
-ClassMD DynamicHost
-ClassMD DynamicContext
-ClassMD DynamicElement
-ClassMD Shrink
-ClassMD Unconstrained
-ClassMD SimpleRotate
-ClassMD StopPaging
-ClassMD Container
-ClassMD Layer
-ClassMD Layers
-ClassMD DefaultTextStyle
-ClassMD ScaleToFit
-ClassMD SectionLink
-ClassMD InlinedElement
-ClassMD Inlined
-ClassMD Hyperlink
 ClassMD DebugPointer
-ClassMD Extend
-ClassMD GenerateDynamicImageDelegatePayload
-ClassMD DynamicImage
-ClassMD Line
-ClassMD ShowEntire
-ClassMD ColumnItem
-ClassMD ColumnItemRenderingCommand
-ClassMD Column
-ClassMD Empty
-ClassMD Border
-ClassMD Scale
-ClassMD Alignment
-ClassMD ContentDirectionSetter
-ClassMD DebugArea
-ClassMD EnsureSpace
-ClassMD SkipOnce
-ClassMD LayoutOverflowVisualization
-ClassMD Translate
-ClassMD Rotate
-ClassMD GridElement
-ClassMD Grid
-ClassMD RowItem
-ClassMD RowItemRenderingCommand
-ClassMD Row
-ClassMD Padding
-ClassMD PageBreak
-ClassMD DecorationItemRenderingCommand
-ClassMD Decoration
-ClassMD Constrained
-ClassMD Background
-ClassMD Placeholder
-ClassMD ShowOnce
-ClassMD AspectRatio
-ClassMD Section
-ClassMD DynamicSvgImage
-ClassMD ShowIfContext
-ClassMD ShowIf
-ClassMD Page
-ClassMD SvgPath
-ClassMD SkWriteStream
-ClassMD API
-ClassMD SkNativeDependencyCompatibilityChecker
-ClassMD SkSvgImage
-ClassMD SkiaAPI
-ClassMD Utf8StringMarshaller
-ClassMD SkPicture
-ClassMD SkXpsDocument
-ClassMD SkPictureRecorder
-ClassMD SkCanvas
-ClassMD SkText
-ClassMD SkNativeDependencyProvider
-ClassMD SkDocument
-ClassMD SkData
-ClassMD SkSvgCanvas
-ClassMD SkImage
-ClassMD SkPdfDocument
-ClassMD SkBitmap
-ClassMD FontManager
-ClassMD ImageCanvas
-ClassMD SkiaCanvasBase
-ClassMD PdfCanvas
-ClassMD XpsCanvas
-ClassMD PreviewerPageSnapshot
-ClassMD PreviewerDocumentSnapshot
-ClassMD PreviewerCanvas
-ClassMD SkiaDocumentCanvasBase
-ClassMD DocumentGenerator
-ClassMD FreeCanvas
-ClassMD DocumentContainer
-ClassMD LineExtensions
-ClassMD ElementExtensions
-ClassMD LayersDescriptor
-ClassMD LayerExtensions
-ClassMD ContentDirectionExtensions
-ClassMD GridDescriptor
-ClassMD GridExtensions
-ClassMD DecorationDescriptor
-ClassMD DecorationExtensions
-ClassMD ScaleExtensions
-ClassMD TableColumnsDefinitionDescriptor
-ClassMD TableCellDescriptor
-ClassMD TableDescriptor
-ClassMD TableExtensions
-ClassMD TableCellExtensions
-ClassMD TranslateExtensions
-ClassMD PageDescriptor
-ClassMD PageExtensions
-ClassMD SvgImageDescriptor
-ClassMD SvgExtensions
-ClassMD RotateExtensions
-ClassMD RowDescriptor
-ClassMD RowExtensions
-ClassMD TextStyleExtensions
-ClassMD DebugExtensions
-ClassMD ShrinkExtensions
-ClassMD DynamicComponentExtensions
-ClassMD ColumnDescriptor
-ClassMD ColumnExtensions
-ClassMD GenerateExtensions
-ClassMD TextSpanDescriptorExtensions
-ClassMD Document
-ClassMD ExtendExtensions
-ClassMD AlignmentExtensions
-ClassMD DynamicImageDescriptor
-ClassMD ImageDescriptor
-ClassMD ImageExtensions
-ClassMD InlinedDescriptor
-ClassMD InlinedExtensions
-ClassMD PaddingExtensions
-ClassMD ComponentDescriptor
-ClassMD ComponentExtensions
-ClassMD TextSpanDescriptor
-ClassMD TextPageNumberDescriptor
-ClassMD TextBlockDescriptor
-ClassMD TextDescriptor
-ClassMD TextExtensions
-ClassMD BorderExtensions
-ClassMD ConstrainedExtensions
-ClassMD RenderingTest
-ClassMD SimpleDocument
-ClassMD TableCellRenderingCommand
-ClassMD TableLayoutValidator
-ClassMD DynamicDictionary
-ClassMD TableLayoutPlanner
 ClassMD TableCell
-ClassMD Table
 ClassMD TableColumnDefinition
-ClassMD TextBlock
-ClassMD SkParagraphBuilderPoolManager
-ClassMD SkFontCollection
-ClassMD SkParagraphBuilder
-ClassMD SkFontManager
-ClassMD SkParagraph
-ClassMD SkTypefaceProvider
-ClassMD SkTypeface
-ClassMD SkTextStyle
-ClassMD DocumentComposeException
-ClassMD InitializationException
-ClassMD DocumentLayoutException
-ClassMD DocumentDrawingException
-ClassMD CacheProxy
-ClassMD ElementProxy
-ClassMD TreeNode
-ClassMD TreeTraversal
-ClassMD OverflowDebuggingProxy
 ClassMD TextBlockHyperlink
-ClassMD TextBlockSectionLink
-ClassMD TextBlockSpan
-ClassMD TextBlockPageNumber
-ClassMD TextBlockElement
 InterfaceMD ICacheable
 InterfaceMD IPageContext
 InterfaceMD IStateResettable
@@ -259,149 +45,15 @@ InterfaceMD IDocument
 InterfaceMD IContainer
 InterfaceMD IRenderingCanvas
 InterfaceMD IContentDirectionAware
-InterfaceMD IDynamicComponent
-InterfaceMD IDynamicElement
-InterfaceMD ILine
-InterfaceMD ITableCellContainer
 InterfaceMD ITextBlockItem
 ExternalMD Window
-ExternalMD Application
 ExternalMD ReactiveObject
-ExternalMD Control
-ExternalMD ICustomDrawOperation
-ExternalMD IDisposable
-ExternalMD ICustomMarshaler
-ExternalMD Exception
+ExternalMD Container
+ExternalMD ITableCellContainer
+ExternalMD TextBlockSpan
 ReportSectionText  --> ReportSectionElement
 ReportSectionMap  --> ReportSectionElement
 ReportSectionPhotos  --> ReportSectionElement
 RenderedPageSnapshot  --> PageSnapshotIndex
-SectionTemplate --> IComponent
-StandardReport --> IDocument
-PhotoTemplate --> IComponent
-TableOfContentsTemplate --> IComponent
-DifferentHeadersTemplate --> IDocument
-ImagePlaceholder --> IComponent
-ExceptionDocument --> IDocument
-ContainerElement  --> Element
-ContainerElement --> IContainer
-Slot  --> Container
 Slot --> ISlot
-PageContext --> IPageContext
-MergedDocument --> IDocument
-Element --> IElement
-DynamicHost  --> Element
-DynamicHost --> IContentDirectionAware
-DynamicHost --> IStateResettable
-DynamicElement  --> ContainerElement
-DynamicElement --> IDynamicElement
-Shrink  --> ContainerElement
-Shrink --> IContentDirectionAware
-Unconstrained  --> ContainerElement
-Unconstrained --> ICacheable
-Unconstrained --> IContentDirectionAware
-SimpleRotate  --> ContainerElement
-SimpleRotate --> ICacheable
-StopPaging  --> ContainerElement
-Container  --> ContainerElement
-Layer  --> ContainerElement
-Layers  --> Element
-Layers --> ICacheable
-DefaultTextStyle  --> ContainerElement
-ScaleToFit  --> ContainerElement
-SectionLink  --> ContainerElement
-InlinedElement  --> Container
-Inlined  --> Element
-Inlined --> IContentDirectionAware
-Inlined --> IStateResettable
-Hyperlink  --> ContainerElement
-Hyperlink --> IContentDirectionAware
-DebugPointer  --> Container
-Extend  --> ContainerElement
-Extend --> ICacheable
-DynamicImage  --> Element
-Line  --> Element
-Line --> ICacheable
-Line --> ILine
-ShowEntire  --> ContainerElement
-ShowEntire --> ICacheable
-ColumnItem  --> Container
-Column  --> Element
-Column --> IStateResettable
-Column --> ICacheable
-Empty  --> Element
-Border  --> ContainerElement
-Scale  --> ContainerElement
-Scale --> ICacheable
-Alignment  --> ContainerElement
-ContentDirectionSetter  --> ContainerElement
-DebugArea --> IComponent
-EnsureSpace  --> ContainerElement
-EnsureSpace --> ICacheable
-SkipOnce  --> ContainerElement
-SkipOnce --> IStateResettable
-LayoutOverflowVisualization  --> ContainerElement
-LayoutOverflowVisualization --> IContentDirectionAware
-Translate  --> ContainerElement
-Rotate  --> ContainerElement
-Grid --> IComponent
-RowItem  --> Container
-Row  --> Element
-Row --> IContentDirectionAware
-Row --> IStateResettable
-Row --> ICacheable
-Padding  --> ContainerElement
-Padding --> ICacheable
-PageBreak  --> Element
-PageBreak --> IStateResettable
-Decoration  --> Element
-Decoration --> IContentDirectionAware
-Decoration --> ICacheable
-Constrained  --> ContainerElement
-Constrained --> IContentDirectionAware
-Constrained --> ICacheable
-Background  --> ContainerElement
-Placeholder --> IComponent
-ShowOnce  --> ContainerElement
-ShowOnce --> ICacheable
-ShowOnce --> IStateResettable
-AspectRatio  --> ContainerElement
-AspectRatio --> IContentDirectionAware
-AspectRatio --> ICacheable
-Section  --> ContainerElement
-Section --> IStateResettable
-DynamicSvgImage  --> Element
-ShowIf  --> ContainerElement
-Page --> IComponent
-SvgPath  --> Element
-ImageCanvas  --> SkiaCanvasBase
-SkiaCanvasBase --> IRenderingCanvas
-SkiaCanvasBase --> ICanvas
-PdfCanvas  --> SkiaDocumentCanvasBase
-XpsCanvas  --> SkiaDocumentCanvasBase
-PreviewerCanvas  --> SkiaCanvasBase
-SkiaDocumentCanvasBase  --> SkiaCanvasBase
-FreeCanvas --> IRenderingCanvas
-FreeCanvas --> ICanvas
-DocumentContainer --> IDocumentContainer
-Document --> IDocument
-TextPageNumberDescriptor  --> TextSpanDescriptor
-TextBlockDescriptor  --> TextSpanDescriptor
-SimpleDocument --> IDocument
-TableCell  --> Container
-TableCell --> ITableCellContainer
-Table  --> Element
-Table --> IContentDirectionAware
-Table --> IStateResettable
-TextBlock  --> Element
-TextBlock --> IContentDirectionAware
-TextBlock --> IStateResettable
-CacheProxy  --> ElementProxy
-ElementProxy  --> ContainerElement
-OverflowDebuggingProxy  --> ElementProxy
-TextBlockHyperlink  --> TextBlockSpan
-TextBlockSectionLink  --> TextBlockSpan
-TextBlockSpan --> ITextBlockItem
-TextBlockPageNumber  --> TextBlockSpan
-TextBlockElement --> ITextBlockItem
 @enduml

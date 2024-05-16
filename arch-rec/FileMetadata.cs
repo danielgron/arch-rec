@@ -7,8 +7,8 @@ public class FileMetadata
     public string Filename { get; set; }
     public string Classname { get; set; }
     public NameSpace NameSpace { get; set; }
-    public List<NameSpace> Usings { get; set; }
-    public FileType fileType { get; set; }
+    public IDictionary<string, NameSpace> Usings { get; set; }
+    //public FileType fileType { get; set; }
 
     public Dictionary<string, ClassMetaData> Classes = new Dictionary<string, ClassMetaData>();
     public Dictionary<string, InterfaceMetaData> Interfaces = new Dictionary<string, InterfaceMetaData>();
@@ -17,28 +17,67 @@ public class FileMetadata
 
     public FileMetadata(string filename, string[] codeLines, IDictionary<string, NameSpace> nameSpaces)
     {
+        Usings = new Dictionary<string, NameSpace>();
         NameSpace ns = null;
         try
         {
             var usings = codeLines.Where(x => x.TrimStart().StartsWith("using"));
-            var nameSpace = codeLines.First(x => x.TrimStart().StartsWith("namespace")).Split(" ", StringSplitOptions.RemoveEmptyEntries)[1].Split(".");
 
+            foreach (var u in usings)
+            {
+                var fullusingNameSpace = u.Split(" ", StringSplitOptions.RemoveEmptyEntries)[1].Replace(";", "");
+
+                if (fullusingNameSpace.ToLower() == fullusingNameSpace)
+                {
+                    continue; //Hacky way of ignoring using statements that are not namespaces
+                }
+                var usingNameSpace = fullusingNameSpace.Split(".");
+                for (int i = 0; i < usingNameSpace.Length; i++)
+                {
+
+                    if (Usings.ContainsKey(fullusingNameSpace))
+                    {
+                        continue;
+                    }
+                    var parentNS = i == 0 ? null : string.Join(".", usingNameSpace.Take(i + 1 - 1).ToArray());
+                    var parent = i == 0 || !Usings.ContainsKey(parentNS) ? null : Usings[parentNS];
+                    ns = new NameSpace(fullusingNameSpace, parent);
+                    Usings.Add(ns.FullName, ns);
+                }
+            }
+
+            var fullNameSpace = codeLines.First(x => x.TrimStart().StartsWith("namespace")).Split(" ", StringSplitOptions.RemoveEmptyEntries)[1];
+            var nameSpace = codeLines.First(x => x.TrimStart().StartsWith("namespace")).Split(" ", StringSplitOptions.RemoveEmptyEntries)[1].Split(".");
+            if (fullNameSpace == "QuestPDF.Previewer")
+            {
+                Console.WriteLine("Found");
+            }
             for (int i = 0; i < nameSpace.Length; i++)
             {
-                if (nameSpaces.ContainsKey(nameSpace[i]))
+                var nsStrings = nameSpace.Take(i + 1).ToArray();
+                var parentNS = i == 0 ? null : nameSpace.Take(i + 1 - 1).ToArray();
+                var joined = i == 0 ? null : string.Join(".", parentNS);
+                var parent = i == 0 ? null : nameSpaces[joined];
+
+                var nsName = string.Join(".", nsStrings).Replace(";", "");
+                if (nameSpaces.ContainsKey(nsName))
                 {
+                    ns = nameSpaces[nsName];
+                    foreach (var u in Usings.Values)
+                    {
+                        ns.AddUsing(u);
+
+                    }
                     continue;
                 }
-                var parent = i == 0 ? null : nameSpaces[nameSpace[i - 1]];
-                ns = new NameSpace(nameSpace[i], parent);
-                nameSpaces.Add(ns.Name, ns);
+                ns = new NameSpace(nsName, parent);
+                ns.Usings = Usings;
+                nameSpaces.Add(ns.FullName, ns);
             }
 
             string pattern = @"\b(public|private|protected|internal|static)?\s*(class|interface)\s+(\w+)(\s*:\s*(\w+(\s*,\s*\w+)*))?";
 
             Regex regex = new Regex(pattern);
-
-
 
             for (int i = 0; i < codeLines.Length; i++)
             {
@@ -81,14 +120,15 @@ public class FileMetadata
                         Console.WriteLine($"{line}");
                         Console.WriteLine($"Found {type}: {name}, Inheritance/Interfaces: {inheritance}");
 
-                        if (name.ToLower() == name){
-                             continue;   
-                            }
+                        if (name.ToLower() == name)
+                        {
+                            continue;
+                        }
 
 
                         if (type == "class")
                         {
-                            
+
                             var c = new ClassMetaData(name, ns, null);
                             Classes.Add(c.Name, c);
 
