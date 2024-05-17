@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns:viz="http:///www.gexf.net/1.1draft/viz" version="1.1" xmlns="http://www.gexf.net/1.1draft">
+<graph defaultedgetype="directed" idtype="string" type="static">
+<attributes class="node" mode="static">
+<attribute id="0" title="Type" type="string"/>
+</attributes>
+<nodes count="42">
+<node id="0.0" label="ReportModel"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="1.0" label="ReportHeaderField"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="2.0" label="Location"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="3.0" label="ReportSection"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="4.0" label="ReportSectionElement"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="5.0" label="ReportSectionText"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="6.0" label="ReportSectionMap"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="7.0" label="ReportSectionPhotos"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="8.0" label="ReportPhoto"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="9.0" label="PreviewerWindow"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="10.0" label="PreviewerWindowViewModel"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="11.0" label="DocumentStructure"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="12.0" label="PageSize"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="13.0" label="PageSnapshotIndex"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="14.0" label="RenderedPageSnapshot"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="15.0" label="DocumentLocation"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="16.0" label="Slot"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="17.0" label="DocumentSettings"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="18.0" label="ImageGenerationSettings"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="19.0" label="Fonts"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="20.0" label="DebugPointer"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="21.0" label="TableCell"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="22.0" label="TableColumnDefinition"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="23.0" label="TextBlockHyperlink"/>
+<attvalues>
+<attvalue for="0" value="Class"/>
+</attvalues>
+<node id="24.0" label="ICacheable" type="Interface"/>
+<node id="25.0" label="IPageContext" type="Interface"/>
+<node id="26.0" label="IStateResettable" type="Interface"/>
+<node id="27.0" label="IDocumentContainer" type="Interface"/>
+<node id="28.0" label="IElement" type="Interface"/>
+<node id="29.0" label="ICanvas" type="Interface"/>
+<node id="30.0" label="ISlot" type="Interface"/>
+<node id="31.0" label="IComponent" type="Interface"/>
+<node id="32.0" label="IDocument" type="Interface"/>
+<node id="33.0" label="IContainer" type="Interface"/>
+<node id="34.0" label="IRenderingCanvas" type="Interface"/>
+<node id="35.0" label="IContentDirectionAware" type="Interface"/>
+<node id="36.0" label="ITextBlockItem" type="Interface"/>
+<node id="37.0" label="Window" type="Unresolved"/>
+<node id="38.0" label="ReactiveObject" type="Unresolved"/>
+<node id="39.0" label="Container" type="Unresolved"/>
+<node id="40.0" label="ITableCellContainer" type="Unresolved"/>
+<node id="41.0" label="TextBlockSpan" type="Unresolved"/>
+</nodes>
+<edges count="5">
+<edge id="0" source="6.0" target="5.0"/>
+<edge id="1" source="7.0" target="5.0"/>
+<edge id="2" source="8.0" target="5.0"/>
+<edge id="3" source="15.0" target="14.0"/>
+<edge id="4" source="17.0" target="31.0"/>
+</edges>
+</graph>
+</gexf>

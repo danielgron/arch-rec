@@ -71,7 +71,9 @@ foreach (var iface in interfaces)
 }
 
 GraphWriter.WriteClasses("./cidiagram.puml", classes, interfaces, unresolved);
+GexfWriter.WriteClasses("./classdiagram.gexf", classes, interfaces, unresolved);
 GraphWriter.WriteNamespace("./nsdiagram.puml", ns);
+GexfWriter.WriteNamespace("./nsdiagram.gexf", ns);
 
 foreach (var n in ns)
 {

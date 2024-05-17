@@ -3,14 +3,12 @@ left to right direction
 skinparam defaultFontSize 16
 !define InternalMD circle #green
 !define ExternalMD circle #red
-<style>
-circle {
-  FontSize 30
-  BackGroundColor yellow
-  Margin 30
-  Padding 50
+ExternalMD {
+FontSize 30
+BackGroundColor yellow
+Margin 30
+Padding 50
 }
-</style>
 InternalMD QuestPDF
 ExternalMD System
 ExternalMD System.Collections.Generic
