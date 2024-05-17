@@ -8,7 +8,7 @@ var csprojFiles = Directory.GetFiles(path).Where(f => f.EndsWith(".csproj"));
 var classes = new Dictionary<string, ClassMetaData>();
 var interfaces = new Dictionary<string, InterfaceMetaData>();
 var unresolved = new List<string>();
-var ns = new Dictionary<string, NameSpace>();
+var ns = new List<NameSpace>();
 
 foreach (var file in csFiles)
 {
@@ -72,12 +72,12 @@ foreach (var iface in interfaces)
 
 GraphWriter.WriteClasses("./cidiagram.puml", classes, interfaces, unresolved);
 GexfWriter.WriteClasses("./classdiagram.gexf", classes, interfaces, unresolved);
-GraphWriter.WriteNamespace("./nsdiagram.puml", ns);
+//GraphWriter.WriteNamespace("./nsdiagram.puml", ns);
 GexfWriter.WriteNamespace("./nsdiagram.gexf", ns);
 
 foreach (var n in ns)
 {
-    Console.WriteLine(n.Value);
+    //Console.WriteLine(n.Value);
 
 
 }

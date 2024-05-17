@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+
 public class NameSpace
 {
     public NameSpace Parent { get; set; }
@@ -7,7 +8,7 @@ public class NameSpace
     public string Name { get; set; }
     public string FullName { get; set; }
     public List<FileMetadata> Files {get; private set;}
-    public IDictionary<string, NameSpace> Usings { get; set; }
+    public IDictionary<string, NamespaceWrapper> Usings { get; set; }
 
     public NameSpace(string fullName, NameSpace parent)
     {
@@ -17,7 +18,7 @@ public class NameSpace
         if (Parent != null) Parent.AddChild(this);
         Files = new List<FileMetadata>();
         Children = new Dictionary<string, NameSpace>();
-        Usings = new Dictionary<string, NameSpace>();
+        Usings = new Dictionary<string, NamespaceWrapper>();
     }
 
     public void AddFile(FileMetadata file){
@@ -25,8 +26,10 @@ public class NameSpace
     }
 
     public void AddUsing(NameSpace ns){
-
-        Usings.Add(ns.FullName, ns);
+        if(Usings.ContainsKey(ns.FullName)){
+            Usings[ns.FullName].Count++;
+        }
+        else Usings.Add(ns.FullName, new NamespaceWrapper(ns));
     }
 
     public void AddChild(NameSpace child){

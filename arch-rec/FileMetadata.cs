@@ -7,7 +7,7 @@ public class FileMetadata
     public string Filename { get; set; }
     public string Classname { get; set; }
     public NameSpace NameSpace { get; set; }
-    public IDictionary<string, NameSpace> Usings { get; set; }
+    public IDictionary<string, NamespaceWrapper> Usings { get; set; }
     //public FileType fileType { get; set; }
 
     public Dictionary<string, ClassMetaData> Classes = new Dictionary<string, ClassMetaData>();
@@ -15,9 +15,9 @@ public class FileMetadata
 
 
 
-    public FileMetadata(string filename, string[] codeLines, IDictionary<string, NameSpace> nameSpaces)
+    public FileMetadata(string filename, string[] codeLines, List<NameSpace> nameSpaces)
     {
-        Usings = new Dictionary<string, NameSpace>();
+        Usings = new Dictionary<string, NamespaceWrapper>();
         NameSpace ns = null;
         try
         {
@@ -37,12 +37,13 @@ public class FileMetadata
 
                     if (Usings.ContainsKey(fullusingNameSpace))
                     {
+                        Usings[fullusingNameSpace].Count ++;
                         continue;
                     }
                     var parentNS = i == 0 ? null : string.Join(".", usingNameSpace.Take(i + 1 - 1).ToArray());
-                    var parent = i == 0 || !Usings.ContainsKey(parentNS) ? null : Usings[parentNS];
+                    var parent = i == 0 || !Usings.ContainsKey(parentNS) ? null : Usings[parentNS].NameSpace;
                     ns = new NameSpace(fullusingNameSpace, parent);
-                    Usings.Add(ns.FullName, ns);
+                    Usings.Add(ns.FullName, new NamespaceWrapper(ns));
                 }
             }
 
@@ -57,22 +58,22 @@ public class FileMetadata
                 var nsStrings = nameSpace.Take(i + 1).ToArray();
                 var parentNS = i == 0 ? null : nameSpace.Take(i + 1 - 1).ToArray();
                 var joined = i == 0 ? null : string.Join(".", parentNS);
-                var parent = i == 0 ? null : nameSpaces[joined];
+                var parent = i == 0 ? null : nameSpaces.FirstOrDefault(x => x.FullName == joined);
 
                 var nsName = string.Join(".", nsStrings).Replace(";", "");
-                if (nameSpaces.ContainsKey(nsName))
+                if (nameSpaces.Any(x => x.FullName == nsName))
                 {
-                    ns = nameSpaces[nsName];
+                    ns = nameSpaces.First(x => x.FullName == nsName);
                     foreach (var u in Usings.Values)
                     {
-                        ns.AddUsing(u);
+                        ns.AddUsing(u.NameSpace);
 
                     }
                     continue;
                 }
                 ns = new NameSpace(nsName, parent);
                 ns.Usings = Usings;
-                nameSpaces.Add(ns.FullName, ns);
+                nameSpaces.Add( ns);
             }
 
             string pattern = @"\b(public|private|protected|internal|static)?\s*(class|interface)\s+(\w+)(\s*:\s*(\w+(\s*,\s*\w+)*))?";
@@ -156,6 +157,7 @@ public class FileMetadata
         catch (Exception ex)
         {
             Console.WriteLine($"Failed to determine content of {filename}");
+            Console.WriteLine(ex);
         }
 
     }

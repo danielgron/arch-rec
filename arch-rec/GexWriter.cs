@@ -1,20 +1,21 @@
 public class GexfWriter
 {
 
-    
-    public static void WriteClasses(string outputPath, Dictionary<string, ClassMetaData> classes, Dictionary<string, InterfaceMetaData> interfaces, 
-        List<string> unresolved){
-    var sw = new StreamWriter(outputPath);
+
+    public static void WriteClasses(string outputPath, Dictionary<string, ClassMetaData> classes, Dictionary<string, InterfaceMetaData> interfaces,
+        List<string> unresolved)
+    {
+        var sw = new StreamWriter(outputPath);
 
 
-    var nodeCount = classes.Count + interfaces.Count + unresolved.Count;
-    var idCount = 0;
-    var edgeCount = 0;
-    var nodeIds = new Dictionary<string, int>();
+        var nodeCount = classes.Count + interfaces.Count + unresolved.Count;
+        var idCount = 0;
+        var edgeCount = 0;
+        var nodeIds = new Dictionary<string, int>();
 
 
 
-    using (sw)
+        using (sw)
         {
             sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             sw.WriteLine("<gexf xmlns:viz=\"http:///www.gexf.net/1.1draft/viz\" version=\"1.1\" xmlns=\"http://www.gexf.net/1.1draft\">");
@@ -23,14 +24,14 @@ public class GexfWriter
             sw.WriteLine("<attribute id=\"0\" title=\"Type\" type=\"string\"/>");
             sw.WriteLine("</attributes>");
             sw.WriteLine($"<nodes count=\"{nodeCount}\">");
-            
-                    foreach (var c in classes)
+
+            foreach (var c in classes)
             {
                 //if (c.Value.Implements.Count == 0) continue;
                 sw.WriteLine($"<node id=\"{idCount++}.0\" label=\"{c.Key}\"/>");
                 sw.WriteLine("<attvalues>");
                 sw.WriteLine($"<attvalue for=\"0\" value=\"Class\"/>");
-                sw.WriteLine("</attvalues>"); 
+                sw.WriteLine("</attvalues>");
                 nodeIds.Add(c.Key, idCount);
             }
             foreach (var i in interfaces)
@@ -46,20 +47,23 @@ public class GexfWriter
             }
 
             List<string> edges = new List<string>();
+            Dictionary<string, int> weigths = new Dictionary<string, int>();
 
             foreach (var c in classes)
             {
                 //if (c.Value.Implements.Count == 0) continue;
-                if (c.Value.BaseClass != null){
+                if (c.Value.BaseClass != null)
+                {
+
                     edges.Add($"<edge id=\"{edgeCount++}\" source=\"{nodeIds[c.Key]}.0\" target=\"{nodeIds[c.Value.BaseClass.Name]}.0\"/>");
-                    
+
                 }
                 foreach (var iface in c.Value.Implements)
                 {
                     edges.Add($"<edge id=\"{edgeCount++}\" source=\"{nodeIds[c.Key]}.0\" target=\"{nodeIds[iface.Name]}.0\"/>");
-                    
+
                 }
-                
+
             }
             sw.WriteLine("</nodes>");
             sw.WriteLine($"<edges count=\"{edgeCount}\">");
@@ -70,24 +74,25 @@ public class GexfWriter
             sw.WriteLine("</edges>");
             sw.WriteLine("</graph>");
             sw.WriteLine("</gexf>");
-        
+
         }
 
 
     }
 
-    public static void WriteNamespace(string outputPath, Dictionary<string, NameSpace> namespaces){
+    public static void WriteNamespace(string outputPath, List<NameSpace> namespaces)
+    {
         var sw = new StreamWriter(outputPath);
 
 
-    Dictionary<string, NameSpace> addedDeps = new Dictionary<string, NameSpace>();
+        Dictionary<string, NameSpace> addedDeps = new Dictionary<string, NameSpace>();
 
-    var nodeCount = 0;
-    var idCount = 0;
-    var edgeCount = 0;
-    var nodeIds = new Dictionary<string, int>();
+        var nodeCount = 0;
+        var idCount = 0;
+        var edgeCount = 0;
+        var nodeIds = new Dictionary<string, int>();
 
-    using (sw)
+        using (sw)
         {
             sw.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             sw.WriteLine("<gexf xmlns:viz=\"http:///www.gexf.net/1.1draft/viz\" version=\"1.1\" xmlns=\"http://www.gexf.net/1.1draft\">");
@@ -99,16 +104,18 @@ public class GexfWriter
 
             foreach (var n in namespaces)
             {
-                nodes.Add($"<node id=\"{idCount++}.0\" label=\"{n.Key}\"/>");
-                nodeIds.Add(n.Key, idCount);
+                nodes.Add($"<node id=\"{n.FullName}\" label=\"{n.FullName}\"/>");
+                //nodeIds.Add(n.Key, idCount);
 
-                foreach (var u in n.Value.Usings)
+                foreach (var u in n.Usings)
                 {
-                    if (!namespaces.ContainsKey(u.Value.FullName) && !addedDeps.ContainsKey(u.Value.FullName)){
+                    var usingNameSpace = u.Value.NameSpace;
+                    if (!namespaces.Any(n => n.FullName == usingNameSpace.FullName) && !addedDeps.ContainsKey(usingNameSpace.FullName))
+                    {
 
-                        nodes.Add($"<node id=\"{idCount++}.0\" label=\"{u.Value.FullName}\"/>");
-                        nodeIds.Add(u.Value.FullName, idCount);
-                        addedDeps.Add(u.Value.FullName, u.Value);
+                        nodes.Add($"<node id=\"{usingNameSpace.FullName}\" label=\"{usingNameSpace.FullName}\"/>");
+                        nodeIds.Add(usingNameSpace.FullName, idCount);
+                        addedDeps.Add(usingNameSpace.FullName, u.Value.NameSpace);
 
                     }
                 }
@@ -120,26 +127,32 @@ public class GexfWriter
             }
             sw.WriteLine("</nodes>");
             sw.WriteLine("<edges>");
-            var edges = new List<string>();
+            var edges = new Dictionary<string, int>();
 
             foreach (var n in namespaces)
             {
                 //if (c.Value.Implements.Count == 0) continue;
-                foreach (var u in n.Value.Usings)
+                foreach (var u in n.Usings)
                 {
-                    //if (namespaces.ContainsKey(u.Value.FullName)){
-                        //sw.WriteLine($"{n.Key}  --> {u.Value.FullName}");
-                        edges.Add($"<edge id=\"{edgeCount++}\" source=\"{nodeIds[n.Key]}.0\" target=\"{nodeIds[u.Value.FullName]}.0\"/>");
-
-                    //}
+                    //var edge = $"<edge id=\"{edgeCount++}\" source=\"{nodeIds[n.Key]}.0\" target=\"{nodeIds[u.Value.FullName]}.0\" weight=\"<<w>>.0\"/>";
+                    //var edge= new Edge(nodeIds[n.Key], nodeIds[u.Value.FullName],1);
+                    if (!edges.ContainsKey($"{n.FullName}<>{u.Value.NameSpace.FullName}"))
+                    {
+                        
+                        edges.Add($"{n.FullName}<>{u.Value.NameSpace.FullName}" ,u.Value.Count);
+                    }
+                    else{
+                        edges[$"{n.FullName}<>{u.Value.NameSpace.FullName}"]++;
+                    }
                 }
-                foreach (var item in edges)
-                {
-                    sw.WriteLine(item);
-                    
-                }
-                
             }
+            foreach (var item in edges)
+                {
+                    var line = item.Key.Split("<>");
+                    var edge = $"<edge id=\"{edgeCount++}\" source=\"{line[0]}\" target=\"{line[1]}\" weight=\"<<w>>.0\"/>";   
+                    sw.WriteLine(edge.Replace("<<w>>",item.Value.ToString()));
+
+                }
             sw.WriteLine("</edges>");
             sw.WriteLine("</graph>");
             sw.WriteLine("</gexf>");
@@ -148,7 +161,8 @@ public class GexfWriter
     }
 
 
-    private void WriteInterface(){
+    private void WriteInterface()
+    {
 
     }
 }

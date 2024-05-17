@@ -83,9 +83,9 @@ public class GraphWriter
                 sw.WriteLine($"InternalMD {n.Key}");
                 foreach (var u in n.Value.Usings)
                 {
-                    if (!namespaces.ContainsKey(u.Value.FullName) && !addedDeps.ContainsKey(u.Value.FullName)){
-                        sw.WriteLine($"ExternalMD {u.Value.FullName}");
-                        addedDeps.Add(u.Value.FullName, u.Value);
+                    if (!namespaces.ContainsKey(u.Value.NameSpace.FullName) && !addedDeps.ContainsKey(u.Value.NameSpace.FullName)){
+                        sw.WriteLine($"ExternalMD {u.Value.NameSpace.FullName}");
+                        addedDeps.Add(u.Value.NameSpace.FullName, u.Value.NameSpace);
 
                     }
                 }
@@ -97,7 +97,7 @@ public class GraphWriter
                 foreach (var u in n.Value.Usings)
                 {
                     //if (namespaces.ContainsKey(u.Value.FullName)){
-                        sw.WriteLine($"{n.Key}  --> {u.Value.FullName}");
+                        sw.WriteLine($"{n.Key}  --> {u.Value.NameSpace.FullName}");
                     //}
                 }
                 
