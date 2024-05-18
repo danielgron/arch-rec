@@ -80,7 +80,8 @@ public class GexfWriter
 
     }
 
-    public static void WriteNamespace(string outputPath, List<NameSpace> namespaces)
+    public static void WriteNamespace(string outputPath, List<NameSpace> namespaces, bool includeSystem = false, bool includeInternals = false)
+
     {
         var sw = new StreamWriter(outputPath);
 
@@ -104,16 +105,17 @@ public class GexfWriter
 
             foreach (var n in namespaces)
             {
-                nodes.Add($"<node id=\"{n.FullName}\" label=\"{n.FullName}\"/>");
+                nodes.Add($"<node id=\"{n.FullName}\" label=\"{n.FullName}\"> \n <viz:color r=\"239\" g=\"239\" b=\"66\" a=\"0.6\"/> \n </node>");
                 //nodeIds.Add(n.Key, idCount);
 
                 foreach (var u in n.Usings)
                 {
+                    if (u.Value.NameSpace.FullName.StartsWith("System") && !includeSystem) continue;
                     var usingNameSpace = u.Value.NameSpace;
                     if (!namespaces.Any(n => n.FullName == usingNameSpace.FullName) && !addedDeps.ContainsKey(usingNameSpace.FullName))
                     {
 
-                        nodes.Add($"<node id=\"{usingNameSpace.FullName}\" label=\"{usingNameSpace.FullName}\"/>");
+                        nodes.Add($"<node id=\"{usingNameSpace.FullName}\" label=\"{usingNameSpace.FullName}\"> \n <viz:color r=\"239\" g=\"66\" b=\"66\" a=\"0.6\"/> \n </node>");
                         nodeIds.Add(usingNameSpace.FullName, idCount);
                         addedDeps.Add(usingNameSpace.FullName, u.Value.NameSpace);
 
@@ -134,8 +136,8 @@ public class GexfWriter
                 //if (c.Value.Implements.Count == 0) continue;
                 foreach (var u in n.Usings)
                 {
-                    //var edge = $"<edge id=\"{edgeCount++}\" source=\"{nodeIds[n.Key]}.0\" target=\"{nodeIds[u.Value.FullName]}.0\" weight=\"<<w>>.0\"/>";
-                    //var edge= new Edge(nodeIds[n.Key], nodeIds[u.Value.FullName],1);
+                    if (u.Value.NameSpace.FullName.StartsWith("System") && !includeSystem) continue;
+                    if (u.Value.NameSpace.FullName.StartsWith("QuestPDF") && !includeInternals) continue;
                     if (!edges.ContainsKey($"{n.FullName}<>{u.Value.NameSpace.FullName}"))
                     {
                         
